@@ -13,6 +13,7 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHealth; // Fixed Health so that Prefabs with different maxHealth will start with their designated health.
         originalScale = this.gameObject.transform.localScale.x;
     }
 

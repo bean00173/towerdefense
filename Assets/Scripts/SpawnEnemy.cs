@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
-    public GameObject[] enemyPrefabs;
+    public GameObject[] enemyPrefabs; // Made this an Array in order to store multiple enemy types per wave (optional)
     public float spawnInterval = 2;
     public int maxEnemies = 20;
 }
@@ -44,13 +44,13 @@ public class SpawnEnemy : MonoBehaviour
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || (enemiesSpawned != 0 && timeInterval > spawnInterval)) &&
             (enemiesSpawned < waves[currentWave].maxEnemies))
             {
-                if (currentWave > waves.Length - 3)
+                if (waves[currentWave].enemyPrefabs.Length > 1) // Checks if the current wave is set to spawn more than one enemy
                 {
-                    enemyTypeIndex = Random.Range(0, waves[currentWave].enemyPrefabs.Length);
+                    enemyTypeIndex = Random.Range(0, waves[currentWave].enemyPrefabs.Length); // If so, randomly pick which one to spawn
                 }
                 else
                 {
-                    enemyTypeIndex = 0;
+                    enemyTypeIndex = 0; // If not, pick the only one.
                 }
 
                 lastSpawnTime = Time.time;
